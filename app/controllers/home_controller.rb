@@ -30,7 +30,7 @@ class HomeController < ApplicationController
       # binding.pry
         @feed = Instagram.user_media_feed(:access_token => current_user.access_token, :count => 15, :client_id => ENV['INSTAAPI_CLIENT_ID'])
       end
-end
+  end
 
   private
 
