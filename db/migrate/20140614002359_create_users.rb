@@ -7,6 +7,7 @@ class CreateUsers < ActiveRecord::Migration
       t.string :provider
       t.string :name
       t.string :nickname
+      t.string :access_token
     end
   end
 end

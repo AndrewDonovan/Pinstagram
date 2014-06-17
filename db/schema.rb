@@ -23,6 +23,7 @@ ActiveRecord::Schema.define(version: 20140614002359) do
     t.string   "provider"
     t.string   "name"
     t.string   "nickname"
+    t.string   "access_token"
   end
 
 end

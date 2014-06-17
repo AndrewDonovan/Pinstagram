@@ -1,6 +1,6 @@
  require "instagram"
 
-    Instagram.configure do |config|
+Instagram.configure do |config|
 
     config.client_id = 'a1d06227319f417fb2dde8300c2d5b86'
 

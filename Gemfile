@@ -7,6 +7,7 @@ gem 'rails_12factor'
 gem 'hashie', '~> 1.2'
 gem 'omniauth', '~> 1.0'
 gem 'omniauth-instagram'
+gem 'pry'
 
 
 

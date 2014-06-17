@@ -4,6 +4,11 @@ class HomeController < ApplicationController
 
   def index
   		if params[:query] 
+        user = Instagram.user_search(params[:query])[0].id
+        puts "XXXXXXXXXXX"
+        puts user
+        puts Instagram.user_recent_media(user, {:count => 15})
+
   			@user_name = Home.idFind(params[:query])
   			@user_name_Name = Home.nameFind(params[:query])
   		end
@@ -20,14 +25,18 @@ class HomeController < ApplicationController
   	  if params[:hashword2]
 		    @tags2 = Instagram.tag_recent_media((params[:hashword2]), {:count => 15, :client_id => ENV['INSTAAPI_CLIENT_ID']})
    	  end
-   	    # @rangers = Instagram.user_recent_media("15703955", {:count => 5})
-   	    # @tags2 = Instagram.tag_recent_media('nyrangers', {:count => 5, :client_id => ENV['INSTAAPI_CLIENT_ID']})
-  end
+
+      if current_user
+      # binding.pry
+        @feed = Instagram.user_media_feed(:access_token => current_user.access_token, :count => 15, :client_id => ENV['INSTAAPI_CLIENT_ID'])
+      end
+end
 
   private
 
   def get_user_id
       @user = current_user
   end
+end 
 
-end
+

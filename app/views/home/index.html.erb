@@ -7,16 +7,16 @@
 </header>
 <% if @user %> 
 
-<!-- below is not correct... @user is defined as user.first which is not accurate, needs to be current user but is in the wrong controller -->
-<h1>Hello <%= @user.name %></h1>
-<% end %>
-<!--    <div class="row">
- -->
 
-<%= flash[:notice] %>
-
+<h1>Hello <%= @user.name %> 
 <%= link_to "Sign In", "/auth/instagram" %>
 <%= link_to "Sign Out", signout_path %>
+</h1>
+<% end %>
+
+
+
+
 
 
 
@@ -104,17 +104,26 @@
 
 
 <!--    <div class="row">
- -->    <div class="large-3 columns albumview gram">
-<div>in here will be the drag and drop feature to save pictures...</div>
+ -->   
 
+ <div class="large-3 columns gram">
+<div>
+
+<% if @feed.present? %>
+
+<% @feed.each do |feed| %>
+
+<%= image_tag feed.images.standard_resolution.url, class: "picture" %>
+
+<% end %>
+<% end %>
+
+
+</div>
 </div>
 
 
-
-
-
 <% end %>
-
 
 
 
