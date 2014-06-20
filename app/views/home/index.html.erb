@@ -1,10 +1,12 @@
-<html ng-app="drag-and-drop">
+<html>
   <head>
   <!-- everything in the head was pulled from the angular drag and drop example.. need to convert to layout.app view and remove bootstrap -->
       <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
       <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1/jquery-ui.min.js"></script>
-      <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0/angular.min.js"></script>
+
       <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/themes/ui-lightness/jquery-ui.min.css" rel="stylesheet" type="text/css" />
+      <link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.1.1/css/bootstrap.min.css" rel="stylesheet">
+
  <style>
         .thumbnail {  overflow: scroll !important;
                       height: 540px !important;
@@ -17,7 +19,80 @@
       </style>
   </head>
 
-<body>
+
+
+<!-- CONTROLLER SCRIPT BELOW -->
+<script>
+
+  App.controller('oneCtrl', function($scope, $timeout) {
+    $scope.list1 = [];
+    $scope.list2 = [];
+    $scope.list3 = [];
+    $scope.list4 = [];
+
+    // pushing in the urls to the list1 array as objects.
+    <% @feedurls.each do |url| %>
+      $scope.list1.push({
+        'url': '<%= url %>'
+      })
+    <% end %>
+
+    <% @usearch.each do |url| %>
+      $scope.list2.push({
+        'url': '<%= url %>'
+      })
+    <% end %>
+
+    <% @utags.each do |url| %>
+      $scope.list3.push({
+        'url': '<%= url %>'
+      })
+    <% end %>
+
+  
+  $scope.hello = function(id){
+    console.log(id.$id);
+    console.log('popped');
+    $scope.popped =  {
+      'position': 'absolute',
+      'z-index': '9999'
+    };
+  };  
+
+  $scope.bye = function(){
+    console.log('unpopped');
+    $scope.popped =  {
+      'position': 'relative',
+      'z-index': '9999'
+    };
+  };
+
+  $scope.list4 = [
+    { 'title': 'Item 1', 'drag': true },
+    { 'title': 'Item 2', 'drag': true },
+    { 'title': 'Item 3', 'drag': true },
+  ];
+
+
+  // Limit items to be dropped in list1
+  $scope.optionsList1 = {
+    accept: function(dragEl) {
+      if ($scope.list4.length >= 30) {
+        return false;
+      } else {
+        return true;
+      }
+    }
+  };
+});
+</script>
+
+
+
+
+
+<!-- ACTUAL INDEX.HTML.ERB BELOW -->
+<body ng-app="drag-and-drop">
   <div ng-controller="oneCtrl">
 <!-- this is the button as well as sign in and sign out paths - do not want this in final verison and need to style NEED TO FIX THE FACT THAT BOTH SEARCH BOXS HAVE TO BE FULL IN ORDER TO SUBMIT-->
     <%= form_tag root_path, :method => 'get' do %>  
@@ -27,46 +102,43 @@
     <% if @user %> 
         <h1>Hello <%= @user.name %></h1>
     <% end %>
+
+
     <h3>
       <%= link_to "Sign In", "/auth/instagram" %>
       <%= link_to "Sign Out", signout_path %>
     </h3>
 
+
+
+
 <!-- this feed is auto loaded when the user logs in and shows their own news feed / time line -->
 <div class="large-3 columns">
-      <label>current users news feed...</label>
+  <label>current users news feed...</label>
   <div class="gram">
     <div>
-      <% if @feed.present? %>
-        <% @feed.each do |feed| %>
-          <image src="<%= feed.images.standard_resolution.url %>" data-drag="true" data-jqyoui-options="{revert: 'invalid'}" jqyoui-draggable="{animate:true}" />
-        <% end %>
-      <% end %>
+          <img
+          ng-repeat="item in list1"
+          ng-src="{{ item.url }}"
+          data-drag="true"
+          data-jqyoui-options="{revert: 'invalid'}"
+          jqyoui-draggable="{animate:true}" />
     </div>
   </div>
 </div>
-
-
-
 <!-- this shows the search for users profiles. need to fix the fact that it will only show public profiles -->
 <div class="large-3 columns">
     <label>Search @username
       <%= text_field_tag :keyword, params[:keyword] %>
     </label>
-        <div class ="gram">
-          <% if @user_name2.present? %>
-        	   <% @user_name2.each do |u| %>
-             <img
-              src="<%= u.images.standard_resolution.url %>"
-              data-drag="true"
-              data-jqyoui-options="{
-                revert: 'invalid',
-                containment: 'document'}"
-              jqyoui-draggable="{animate:true}"
-              data-jqyoui-options="{revert: 'invalid'}"
-              />
-            <% end %>
-        	<% end %>
+    <div class="gram">
+          <img
+          ng-repeat="item in list2"
+          ng-src="{{ item.url }}"
+          data-drag="true"
+          data-jqyoui-options="{revert: 'invalid'}"
+          jqyoui-draggable="{animate:true}" />
+
       </div>
 </div>
 
@@ -76,11 +148,12 @@
       <%= text_field_tag :hashword, params[:hashword] %>
   </label>
     <div class ="gram">
-      <% if @tags.present? %>
-        <% @tags.each do |tags| %>
-        <image src="<%= tags.images.standard_resolution.url %>" data-drag="true" data-jqyoui-options="{revert: 'invalid'}" jqyoui-draggable="{animate:true}" />
-        <% end %>
-      <% end %>
+          <img
+          ng-repeat="item in list3"
+          ng-src="{{ item.url }}"
+          data-drag="true"
+          data-jqyoui-options="{revert: 'invalid'}"
+          jqyoui-draggable="{animate:true}" />
     </div>
 </div>
 
@@ -88,11 +161,9 @@
 <!-- need to add the column to drag and drop and save photos here. -->
   <div class="large-3 columns">
     THIS IS WHERE YOU WILL DRAG AND DROP PHOTOS...
-          <div class="thumbnail" onDrop="save()"data-drop="true" ng-model='list1' data-jqyoui-options="optionsList1" jqyoui-droppable="{multiple:true}">
+          <div class="thumbnail" onDrop="save()"data-drop="true" ng-model='list1' data-jqyoui-options="optionsList1" jqyoui-droppable="{multiple:true}" stack="true">
       </div>
   </div>
-
-
 </div>
 </body>
 </html>

@@ -30,6 +30,35 @@ class HomeController < ApplicationController
       # binding.pry
         @feed = Instagram.user_media_feed(:access_token => current_user.access_token, :count => 15, :client_id => ENV['INSTAAPI_CLIENT_ID'])
       end
+
+
+
+
+      @feedurls = []
+      if @current_user.present?
+      @feed.each do |feed|
+        @feedurls.push(feed.images.standard_resolution.url)
+      end
+      @feedurls = @feedurls
+    end
+
+      @usearch = []
+      if @user_name2.present?
+          @user_name2.each do |u|
+          @usearch.push(u.images.standard_resolution.url)
+        end
+      end
+      @usearch = @usearch
+
+      @utags = []
+      if @tags.present?
+      @tags.each do |u|
+        @utags.push(u.images.standard_resolution.url)
+      end
+    end
+    @tags = @tags
+
+
   end
 
   private
