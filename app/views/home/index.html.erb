@@ -1,139 +1,99 @@
- <%= form_tag root_path, :method => 'get' do %>
-    
-    
-<header>
-<%= submit_tag "SEARCH INSTAGRAM USERS AND HASHTAGS", class:"button expand" %>
+<html ng-app="drag-and-drop">
+  <head>
+  <!-- everything in the head was pulled from the angular drag and drop example.. need to convert to layout.app view and remove bootstrap -->
+      <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+      <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1/jquery-ui.min.js"></script>
+      <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0/angular.min.js"></script>
+      <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/themes/ui-lightness/jquery-ui.min.css" rel="stylesheet" type="text/css" />
+ <style>
+        .thumbnail {  overflow: scroll !important;
+                      height: 540px !important;
+                      width: 305px !important;
+                      float: left !important;
+                      display: inline-block !important; 
+}
+        .btn-droppable { width: 180px; height: 30px; padding-left: 4px; }
+        .btn-draggable { width: 160px; }
+      </style>
+  </head>
 
-</header>
-<% if @user %> 
+<body>
+  <div ng-controller="oneCtrl">
+<!-- this is the button as well as sign in and sign out paths - do not want this in final verison and need to style NEED TO FIX THE FACT THAT BOTH SEARCH BOXS HAVE TO BE FULL IN ORDER TO SUBMIT-->
+    <%= form_tag root_path, :method => 'get' do %>  
+        <header>
+          <%= submit_tag "SEARCH INSTAGRAM USERS AND HASHTAGS", class:"button expand" %>
+        </header>
+    <% if @user %> 
+        <h1>Hello <%= @user.name %></h1>
+    <% end %>
+    <h3>
+      <%= link_to "Sign In", "/auth/instagram" %>
+      <%= link_to "Sign Out", signout_path %>
+    </h3>
 
-
-<h1>Hello <%= @user.name %> 
-
-</h1>
-<% end %>
-<h3><%= link_to "Sign In", "/auth/instagram" %>
-<%= link_to "Sign Out", signout_path %></h3>
-
-
-
-
-
-
-  <div class="large-3 columns">
-      <label>current users news feed...</label>
- <div class="gram">
-<div>
-
-<% if @feed.present? %>
-
-<% @feed.each do |feed| %>
-
-<%= image_tag feed.images.standard_resolution.url, class: "picture" %>
-
-<% end %>
-<% end %>
-
-
-</div>
-</div>
-
-      <div class ="gram">
-
-
-   <% if @user_name.present? %>
-<!--    <h1><%=@user_name_Name%></h1>
- -->
-	<%@user_name.each do |u|%>
-
-	<%=image_tag u.images.standard_resolution.url, class: "picture"%>
-
-	<% end %>
-	<% end %>
-
-</div>
-
-
-    </div>
-
-
-
-
+<!-- this feed is auto loaded when the user logs in and shows their own news feed / time line -->
 <div class="large-3 columns">
-      <label>Search @username
-<%= text_field_tag :keyword, params[:keyword] %>
-      </label>
-      <div class ="gram">
-
-   <% if @user_name2.present? %>
-
-
-
-	<% @user_name2.each do |u| %>
-
-	<%=image_tag u.images.standard_resolution.url, class: "picture"%>
-
-	<% end %>
-	<% end %>
-
-</div>
+      <label>current users news feed...</label>
+  <div class="gram">
+    <div>
+      <% if @feed.present? %>
+        <% @feed.each do |feed| %>
+          <image src="<%= feed.images.standard_resolution.url %>" data-drag="true" data-jqyoui-options="{revert: 'invalid'}" jqyoui-draggable="{animate:true}" />
+        <% end %>
+      <% end %>
     </div>
-
-
-    <div class="large-3 columns">
-      <label>Search #hashtag
-<%= text_field_tag :hashword, params[:hashword] %>
-      </label>
-
-      <div class ="gram">
-
-   <% if @tags.present? %>
-
-<!--    <h1><#%= params[:hashword] %></h1>
- -->
-  <% @tags.each do |tags| %>
-
-  <%= image_tag tags.images.standard_resolution.url, class: "picture" %>
-
-  <% end %>
-  <% end %>
-
-</div>
-
-
+  </div>
 </div>
 
 
 
+<!-- this shows the search for users profiles. need to fix the fact that it will only show public profiles -->
+<div class="large-3 columns">
+    <label>Search @username
+      <%= text_field_tag :keyword, params[:keyword] %>
+    </label>
+        <div class ="gram">
+          <% if @user_name2.present? %>
+        	   <% @user_name2.each do |u| %>
+             <img
+              src="<%= u.images.standard_resolution.url %>"
+              data-drag="true"
+              data-jqyoui-options="{
+                revert: 'invalid',
+                containment: 'document'}"
+              jqyoui-draggable="{animate:true}"
+              data-jqyoui-options="{revert: 'invalid'}"
+              />
+            <% end %>
+        	<% end %>
+      </div>
+</div>
 
-
-
-
-
-<!--    <div class="row">
- -->    <div class="large-3 columns">
-
- 
-
-    drag and drop photos here...
-
-
+<!-- below shows the search for hashtags -->
+<div class="large-3 columns">
+  <label>Search #hashtag
+      <%= text_field_tag :hashword, params[:hashword] %>
+  </label>
+    <div class ="gram">
+      <% if @tags.present? %>
+        <% @tags.each do |tags| %>
+        <image src="<%= tags.images.standard_resolution.url %>" data-drag="true" data-jqyoui-options="{revert: 'invalid'}" jqyoui-draggable="{animate:true}" />
+        <% end %>
+      <% end %>
+    </div>
 </div>
 
 
+<!-- need to add the column to drag and drop and save photos here. -->
+  <div class="large-3 columns">
+    THIS IS WHERE YOU WILL DRAG AND DROP PHOTOS...
+          <div class="thumbnail" onDrop="save()"data-drop="true" ng-model='list1' data-jqyoui-options="optionsList1" jqyoui-droppable="{multiple:true}">
+      </div>
+  </div>
 
 
-<!--    <div class="row">
- -->   
-
-
-
+</div>
+</body>
+</html>
 <% end %>
-
-
-
-
-
-
-
-

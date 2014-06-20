@@ -36,3 +36,7 @@ footer {
 .albumview {
 	border: 2px dotted black;
 }
+
+.ui-draggable-dragging {
+	position: absolute !important;
+}
