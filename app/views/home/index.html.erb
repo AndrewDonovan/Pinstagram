@@ -1,22 +1,17 @@
 <html>
   <head>
   <!-- everything in the head was pulled from the angular drag and drop example.. need to convert to layout.app view and remove bootstrap -->
-      <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
-      <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1/jquery-ui.min.js"></script>
-
-      <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/themes/ui-lightness/jquery-ui.min.css" rel="stylesheet" type="text/css" />
-      <link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.1.1/css/bootstrap.min.css" rel="stylesheet">
-
- <style>
-        .thumbnail {  overflow: scroll !important;
-                      height: 540px !important;
-                      width: 305px !important;
-                      float: left !important;
-                      display: inline-block !important; 
-}
-        .btn-droppable { width: 180px; height: 30px; padding-left: 4px; }
-        .btn-draggable { width: 160px; }
-      </style>
+    <style>
+      .thumbnail { height: 280px !important; }
+      .btn-droppable { width: 180px; height: 30px; padding-left: 4px; }
+      .btn-draggable { width: 160px; }
+      .emage { height: 215px; }
+      h1 { padding: .2em; margin: 0; }
+      #products { height: 300px;
+  width: 300px;}
+      #cart { width: 200px; float: left; margin-top: 1em; }
+      #cart ol { margin: 0; padding: 1em 0 1em 3em; }
+    </style>
   </head>
 
 
@@ -24,11 +19,23 @@
 <!-- CONTROLLER SCRIPT BELOW -->
 <script>
 
+// $(function() {
+//   $("#catalog").accordion();
+// });
+
+
+var App = angular.module('drag-and-drop', ['ngDragDrop']);
+  
   App.controller('oneCtrl', function($scope, $timeout) {
     $scope.list1 = [];
     $scope.list2 = [];
     $scope.list3 = [];
     $scope.list4 = [];
+    $scope.targetPhoto = null;
+
+    $scope.hideMe = function() {
+    return $scope.list4.length > 0;
+  }
 
     // pushing in the urls to the list1 array as objects.
     <% @feedurls.each do |url| %>
@@ -67,11 +74,20 @@
     };
   };
 
-  $scope.list4 = [
-    { 'title': 'Item 1', 'drag': true },
-    { 'title': 'Item 2', 'drag': true },
-    { 'title': 'Item 3', 'drag': true },
-  ];
+  $scope.selectPhoto = function(item) {
+    console.log(item.target.src);
+    $scope.targetPhoto = {url: item.target.src};
+  }
+
+  $scope.drop = function() {
+    $scope.list4.push($scope.targetPhoto);
+    $scope.targetPhoto = null;
+  }
+
+
+  $scope.save = function(){
+    console.log(this);
+  };
 
 
   // Limit items to be dropped in list1
@@ -84,10 +100,19 @@
       }
     }
   };
+
+  // Limit items to be dropped in list1
+  $scope.optionsList1 = {
+    accept: function(dragEl) {
+      if ($scope.list1.length >= 2) {
+        return false;
+      } else {
+        return true;
+      }
+    }
+  };
 });
 </script>
-
-
 
 
 
@@ -117,12 +142,15 @@
   <label>current users news feed...</label>
   <div class="gram">
     <div>
+          {{list1}}
           <img
           ng-repeat="item in list1"
           ng-src="{{ item.url }}"
           data-drag="true"
-          data-jqyoui-options="{revert: 'invalid'}"
-          jqyoui-draggable="{animate:true}" />
+          data-jqyoui-options="{revert: 'invalid', helper: 'clone'}"
+          jqyoui-draggable="{animate:true, onStart: 'selectPhoto'}" 
+          ng-model="list1"
+          />
     </div>
   </div>
 </div>
@@ -136,9 +164,9 @@
           ng-repeat="item in list2"
           ng-src="{{ item.url }}"
           data-drag="true"
-          data-jqyoui-options="{revert: 'invalid'}"
-          jqyoui-draggable="{animate:true}" />
-
+          data-jqyoui-options="{revert: 'invalid', helper: 'clone'}"
+          jqyoui-draggable="{animate:true}" 
+          ng-model="list2"/>
       </div>
 </div>
 
@@ -152,8 +180,9 @@
           ng-repeat="item in list3"
           ng-src="{{ item.url }}"
           data-drag="true"
-          data-jqyoui-options="{revert: 'invalid'}"
-          jqyoui-draggable="{animate:true}" />
+          data-jqyoui-options="{revert: 'invalid', helper: 'clone'}"
+          jqyoui-draggable="{animate:true}" 
+          ng-model="list3"/>
     </div>
 </div>
 
@@ -161,9 +190,31 @@
 <!-- need to add the column to drag and drop and save photos here. -->
   <div class="large-3 columns">
     THIS IS WHERE YOU WILL DRAG AND DROP PHOTOS...
-          <div class="thumbnail" onDrop="save()"data-drop="true" ng-model='list1' data-jqyoui-options="optionsList1" jqyoui-droppable="{multiple:true}" stack="true">
-      </div>
+
   </div>
+
+
+<!-- test example seeing how this ish works -->
+    <div id="cart">
+        <h1 class="ui-widget-header large-3 columns">Shopping Cart</h1>
+        <div class="ui-widget-content gram" data-drop="true" ng-model='list4' jqyoui-droppable="{multiple:true, onDrop:'drop'}" >
+          
+                <img
+                ng-repeat="item in list4 track by $index"
+                ng-src="{{ item.url }}"
+                data-drag="true"
+                data-jqyoui-options="{revert: 'invalid', helper: 'clone'}"
+                jqyoui-draggable="{index: {{$index}}, animate:true}" 
+                ng-model="list4"/>
+                
+                {{list4}}
+            
+        </div>
+
+    </div>
+<!-- can delete eveything above this is all pulled from example -->
+
+
 </div>
 </body>
 </html>
