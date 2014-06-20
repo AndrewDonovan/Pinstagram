@@ -121,18 +121,22 @@ var App = angular.module('drag-and-drop', ['ngDragDrop']);
   <div ng-controller="oneCtrl">
 <!-- this is the button as well as sign in and sign out paths - do not want this in final verison and need to style NEED TO FIX THE FACT THAT BOTH SEARCH BOXS HAVE TO BE FULL IN ORDER TO SUBMIT-->
     <%= form_tag root_path, :method => 'get' do %>  
-        <header>
-          <%= submit_tag "SEARCH INSTAGRAM USERS AND HASHTAGS", class:"button expand" %>
-        </header>
-    <% if @user %> 
-        <h1>Hello <%= @user.name %></h1>
+        <% if @user %> 
+        <h1 class ="name">Hello <%= @user.name %></h1>
     <% end %>
 
-
-    <h3>
+        <h3 class ="login">
       <%= link_to "Sign In", "/auth/instagram" %>
       <%= link_to "Sign Out", signout_path %>
     </h3>
+
+        <header>
+          <%= submit_tag "SEARCH INSTAGRAM USERS AND HASHTAGS", class:"button expand" %>
+        </header>
+
+
+
+
 
 
 
@@ -142,7 +146,7 @@ var App = angular.module('drag-and-drop', ['ngDragDrop']);
   <label>current users news feed...</label>
   <div class="gram">
     <div>
-          {{list1}}
+          <!-- {{list1}} will show the actual list detail if more info needed -->
           <img
           ng-repeat="item in list1"
           ng-src="{{ item.url }}"
@@ -165,7 +169,7 @@ var App = angular.module('drag-and-drop', ['ngDragDrop']);
           ng-src="{{ item.url }}"
           data-drag="true"
           data-jqyoui-options="{revert: 'invalid', helper: 'clone'}"
-          jqyoui-draggable="{animate:true}" 
+          jqyoui-draggable="{animate:true, onStart: 'selectPhoto'}" 
           ng-model="list2"/>
       </div>
 </div>
@@ -181,7 +185,7 @@ var App = angular.module('drag-and-drop', ['ngDragDrop']);
           ng-src="{{ item.url }}"
           data-drag="true"
           data-jqyoui-options="{revert: 'invalid', helper: 'clone'}"
-          jqyoui-draggable="{animate:true}" 
+          jqyoui-draggable="{animate:true, onStart: 'selectPhoto'}" 
           ng-model="list3"/>
     </div>
 </div>
@@ -189,14 +193,9 @@ var App = angular.module('drag-and-drop', ['ngDragDrop']);
 
 <!-- need to add the column to drag and drop and save photos here. -->
   <div class="large-3 columns">
-    THIS IS WHERE YOU WILL DRAG AND DROP PHOTOS...
-
-  </div>
-
-
-<!-- test example seeing how this ish works -->
-    <div id="cart">
-        <h1 class="ui-widget-header large-3 columns">Shopping Cart</h1>
+  <label>Drop Images To Your Board</label>
+      <div id="cart">
+        <h4 class="ui-widget-header large-3 columns"></h4>
         <div class="ui-widget-content gram" data-drop="true" ng-model='list4' jqyoui-droppable="{multiple:true, onDrop:'drop'}" >
           
                 <img
@@ -207,12 +206,16 @@ var App = angular.module('drag-and-drop', ['ngDragDrop']);
                 jqyoui-draggable="{index: {{$index}}, animate:true}" 
                 ng-model="list4"/>
                 
-                {{list4}}
+                <!-- {{list4}} shows the url info that is being passed over the the function-->
             
         </div>
 
     </div>
-<!-- can delete eveything above this is all pulled from example -->
+
+  </div>
+
+
+
 
 
 </div>
