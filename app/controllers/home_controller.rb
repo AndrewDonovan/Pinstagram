@@ -1,27 +1,16 @@
 class HomeController < ApplicationController
   before_action :get_user_id
   def index
-  		if params[:query] 
-        user = Instagram.user_search(params[:query])[0].id
-        puts "XXXXXXXXXXX"
-        puts user
-        puts Instagram.user_recent_media(user, {:count => 15})
-
-  			@user_name = Home.idFind(params[:query])
-  			@user_name_Name = Home.nameFind(params[:query])
-  		end
-  		if params[:keyword] 
+  		if params[:keyword]
+        # search user names to show their recent media
   			@user_name2 = Home.idFind(params[:keyword])
-  			@user_name_Name2 = Home.nameFind(params[:keyword])
   		end
-  	    @instagram = Instagram.user_recent_media("12278927", {:count => 15})
   	  if params[:hashword]
+        # seach has tags
 		    @tags = Instagram.tag_recent_media((params[:hashword]), {:count => 15, :client_id => ENV['INSTAAPI_CLIENT_ID']})
    	  end
-  	  if params[:hashword2]
-		    @tags2 = Instagram.tag_recent_media((params[:hashword2]), {:count => 15, :client_id => ENV['INSTAAPI_CLIENT_ID']})
-   	  end
       if current_user
+        # this is the actual logged in users news feed of who they are following
         @feed = Instagram.user_media_feed(:access_token => current_user.access_token, :count => 15, :client_id => ENV['INSTAAPI_CLIENT_ID'])
       end
 # below is the code that inputs the above feeds or search inputs into the javascript controllers
@@ -52,7 +41,6 @@ class HomeController < ApplicationController
   def get_user_id
       @user = current_user
   end
-  
 end 
 
 
