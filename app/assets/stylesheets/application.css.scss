@@ -14,8 +14,6 @@
 
  @import "foundation_and_overrides";
 /* Add imports of custom sass/scss files here */
-
-
 .name {
 	float: left;
 	width: 500px;
@@ -47,4 +45,8 @@ footer {
 }
 
 .ui-draggable-dragging {
+	// if needed you can style the element that is selected while it is being dragged....
 }
+
+
+
