@@ -31,6 +31,7 @@
           'url': '<%= url %>'
         })
       <% end %>
+
       // the selectPhoto function gets the photo that is selected url from the item.target.src which is the url inside the dragged images info
     $scope.selectPhoto = function(item) {
       console.log(item.target.src);
@@ -39,6 +40,7 @@
       // upon drop, this pushes the url into the list4 which then displays it, and then after it returns the target back to nil so i can do it again
     $scope.drop = function() {
       $scope.list4.push($scope.targetPhoto);
+      console.log($scope.list4);
       $scope.targetPhoto = null;
     }
   });
@@ -47,13 +49,18 @@
 <!-- INDEX.HTML.ERB BELOW -->
 <body ng-app="drag-and-drop">
   <div ng-controller="oneCtrl">
+<!-- if you are no logged in then render the form / intro page -->
+<% if !@user %>
+<%= render 'form' %>
+<% else %>
     <!-- this is the button as well as sign in and sign out paths - do not want this in final verison and need to style NEED TO FIX THE FACT THAT BOTH SEARCH BOXS HAVE TO BE FULL IN ORDER TO SUBMIT-->
       <%= form_tag root_path, :method => 'get' do %>  
         <% if @user %> 
           <h1 class ="name">Hello <%= @user.name %></h1>
+          <!-- like to the show board for specifc user -->
+          <%= link_to "Board", home_path(@current_user) %>
         <% end %>
         <h3 class ="login">
-          <%= link_to "Sign In", "/auth/instagram" %>
           <%= link_to "Sign Out", signout_path %>
         </h3>
         <header>
@@ -121,5 +128,6 @@
     </div>
   </div>
 <!-- this end is the for form for do loop at the start of the document.... might need to change this and make a form for each one that way you can search only one input at a time -->
+<% end %>
 <% end %>
 </body>

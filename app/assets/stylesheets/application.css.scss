@@ -45,8 +45,9 @@ footer {
 }
 
 .ui-draggable-dragging {
-	// if needed you can style the element that is selected while it is being dragged....
+	height: 300px;
+	width: 300px;
+	z-index: 9999999;
+	opacity: 0.7;
+	border: 5px solid lime;
 }
-
-
-
