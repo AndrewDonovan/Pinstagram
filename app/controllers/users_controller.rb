@@ -11,7 +11,8 @@ class UsersController < ApplicationController
 
 	def show
 		@user = User.find(params[:id])
-		respond_with @user
+		@pictures = current_user.pictures.all
+		respond_with @pictures
 	end
 
 

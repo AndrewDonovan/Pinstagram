@@ -13,7 +13,8 @@
 
 App.factory('Picture', ['$resource', function($resource) {
   return $resource('/pictures/:id',
-     {url: '@url'},
+     {url: '@url',
+      id: '@id' },
      {update: { method: 'PATCH'}});
 }]);
 
@@ -25,7 +26,8 @@ App.factory('Picture', ['$resource', function($resource) {
     $scope.newPicture = new Picture();
 
     Picture.query(function(pictures) {
-      $scope.pictures = pictures;
+      $scope.list4 = pictures;
+      console.log(pictures);
    });
       $scope.list1 = [];
       $scope.list2 = [];
@@ -55,20 +57,22 @@ App.factory('Picture', ['$resource', function($resource) {
       // the selectPhoto function gets the photo that is selected url from the item.target.src which is the url inside the dragged images info
     $scope.selectPhoto = function(item) {
       console.log(item.target.src);
-      $scope.targetPhoto = {url: item.target.src};
+      $scope.targetPhoto = new Picture({
+        url: item.target.src
+      })
     }
       // upon drop, this pushes the url into the list4 which then displays it, and then after it returns the target back to nil so i can do it again
     $scope.drop = function() {
-      $scope.list4.push($scope.targetPhoto);
+      $scope.list4.unshift($scope.targetPhoto);
+      $scope.list4.pop();
       console.log($scope.list4);
-      $scope.targetPhoto = null;
-      $scope.newPicture.$save(function(picture) {
-        $scope.pictures.push(picture)
-        $scope.newPicture = new Picture();
+      $scope.targetPhoto.$save(function(picture) {
+        $scope.pictures.unshift(picture);
+        console.log($scope.pictures);
+        $scope.targetPhoto = new Picture();
       });
+      $scope.targetPhoto = null;
     }
-// below is not being called yet working on getting it to actually save from froyangular app example
-
   }]);
 </script>
 
@@ -96,7 +100,6 @@ App.factory('Picture', ['$resource', function($resource) {
       <h3>News Feed</h3>
         <div class="gram">
           <div>
-              {{"hello"}} 
               <img
               ng-repeat="item in list1"
               ng-src="{{ item.url }}"
@@ -141,7 +144,7 @@ App.factory('Picture', ['$resource', function($resource) {
             <h4 class="ui-widget-header large-3 columns"></h4>
               <div class="ui-widget-content gram" data-drop="true" ng-model='list4' jqyoui-droppable="{multiple:true, onDrop:'drop()'}" >
                     <img
-                    ng-repeat="item in list4 track by $index"
+                    ng-repeat="item in list4"
                     ng-src="{{ item.url }}"
                     data-drag="true"
                     data-jqyoui-options="{revert: 'invalid', helper: 'clone'}"

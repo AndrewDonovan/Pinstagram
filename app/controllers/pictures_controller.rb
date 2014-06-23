@@ -3,7 +3,7 @@ class PicturesController < ApplicationController
   respond_to :json, :html
 
   def index
-  	@pictures = Picture.all
+  	@pictures = current_user.pictures.all
   	respond_with @pictures
   end
 
@@ -28,6 +28,12 @@ class PicturesController < ApplicationController
       end
     end
   end
+
+  def show
+  	@pictures = current_user.pictures.all
+  	respond_with @pictures
+  end
+
 
   def picture_params
     params.require(:picture).permit(:url)
