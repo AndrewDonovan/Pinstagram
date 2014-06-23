@@ -14,6 +14,24 @@
 
  @import "foundation_and_overrides";
 /* Add imports of custom sass/scss files here */
+
+.homepage {
+	background-image: url('plane.png');
+	background-size: cover;
+}
+
+.title {
+	font-family: 'Lobster', cursive;
+	font-size: 100px;
+	text-align: left;
+	color: white;
+}
+
+.signin {
+	font-family: 'Lobster', cursive;
+	text-align: center;
+	font-size: 60px;
+}
 .name {
 	float: left;
 	width: 500px;

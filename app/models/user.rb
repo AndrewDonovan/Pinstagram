@@ -1,4 +1,5 @@
 class User < ActiveRecord::Base
+	has_many :pictures
 	def self.search(query)
 	  where("email like ?", "%#{query}%") 
 	end

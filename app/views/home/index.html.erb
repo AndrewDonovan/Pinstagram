@@ -1,17 +1,37 @@
 <!-- CONTROLLER SCRIPT BELOW -->
 <script>
-  var App = angular.module('drag-and-drop', ['ngDragDrop']);
+  var App = angular.module('drag-and-drop', ['ngDragDrop','ngResource']).config(
+    ['$httpProvider', function($httpProvider) {
+    var authToken = angular.element("meta[name=\"csrf-token\"]").attr("content");
+    var defaults = $httpProvider.defaults.headers;
+
+    defaults.common["X-CSRF-TOKEN"] = authToken;
+    defaults.patch = defaults.patch || {};
+    defaults.patch['Content-Type'] = 'application/json';
+    defaults.common['Accept'] = 'application/json';
+}]);
+
+App.factory('Picture', ['$resource', function($resource) {
+  return $resource('/pictures/:id',
+     {url: '@url'},
+     {update: { method: 'PATCH'}});
+}]);
+
+
   // this controller starts all lists as blank arrays which the feed is pushed into, and then list 4 is dragged into
-    App.controller('oneCtrl', function($scope, $timeout) {
+    App.controller('oneCtrl',['$scope', '$timeout', 'Picture', function($scope, $timeout, Picture) {
+    $scope.pictures= [];
+
+    $scope.newPicture = new Picture();
+
+    Picture.query(function(pictures) {
+      $scope.pictures = pictures;
+   });
       $scope.list1 = [];
       $scope.list2 = [];
       $scope.list3 = [];
       $scope.list4 = [];
       $scope.targetPhoto = null;
-      //   this code was pulled from the example but i am not using it / have yet to use it
-      //   $scope.hideMe = function() {
-      //   return $scope.list4.length > 0;
-      // }
 
       // pushing in the urls to the list array as objects from the home controller.
       <% @feedurls.each do |url| %>
@@ -42,8 +62,14 @@
       $scope.list4.push($scope.targetPhoto);
       console.log($scope.list4);
       $scope.targetPhoto = null;
+      $scope.newPicture.$save(function(picture) {
+        $scope.pictures.push(picture)
+        $scope.newPicture = new Picture();
+      });
     }
-  });
+// below is not being called yet working on getting it to actually save from froyangular app example
+
+  }]);
 </script>
 
 <!-- INDEX.HTML.ERB BELOW -->
@@ -56,9 +82,8 @@
     <!-- this is the button as well as sign in and sign out paths - do not want this in final verison and need to style NEED TO FIX THE FACT THAT BOTH SEARCH BOXS HAVE TO BE FULL IN ORDER TO SUBMIT-->
       <%= form_tag root_path, :method => 'get' do %>  
         <% if @user %> 
-          <h1 class ="name">Hello <%= @user.name %></h1>
+          <h3 class ="name"><%= link_to @user.name, home_path(@current_user) %></h3>
           <!-- like to the show board for specifc user -->
-          <%= link_to "Board", home_path(@current_user) %>
         <% end %>
         <h3 class ="login">
           <%= link_to "Sign Out", signout_path %>
@@ -68,10 +93,10 @@
         </header>
     <!-- this feed is auto loaded when the user logs in and shows their own news feed / time line -->
     <div class="large-3 columns">
-      <label>current users news feed...</label>
+      <h3>News Feed</h3>
         <div class="gram">
           <div>
-              <!-- put {{list1}} will show the actual list detail if more info needed -->
+              {{"hello"}} 
               <img
               ng-repeat="item in list1"
               ng-src="{{ item.url }}"
@@ -111,10 +136,10 @@
     </div>
     <!-- below is where you will add the images to list4, which is the new coloumn of the saved photos -->
     <div class="large-3 columns">
-      <label>Drop Images To Your Board</label>
+      <h3>Board</h3>
         <div id="cart">
             <h4 class="ui-widget-header large-3 columns"></h4>
-              <div class="ui-widget-content gram" data-drop="true" ng-model='list4' jqyoui-droppable="{multiple:true, onDrop:'drop'}" >
+              <div class="ui-widget-content gram" data-drop="true" ng-model='list4' jqyoui-droppable="{multiple:true, onDrop:'drop()'}" >
                     <img
                     ng-repeat="item in list4 track by $index"
                     ng-src="{{ item.url }}"

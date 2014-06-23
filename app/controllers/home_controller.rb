@@ -36,6 +36,7 @@ class HomeController < ApplicationController
       end
   end
 
+
   private
 
   def get_user_id
