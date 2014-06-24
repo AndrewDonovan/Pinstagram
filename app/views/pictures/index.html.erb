@@ -80,9 +80,9 @@ App.factory('Picture', ['$resource', function($resource) {
 <div class="fullboard">
   <% @pictures.each do |p| %>
        <div class="inside", style="background-image: url('<%= p.url %>')">
-       <a class="del-button del-button-hide" href="<%= p.url %>" download> save
+       <a class="del-button del-button-hide" href="<%= p.url %>" download> <i class="fi-arrow-down"></i>
       <%= link_to p, method: :delete do %>
-        <span class="del-button del-button-hide">X</span>
+        <span class="del-button del-button-hide"><i class="fi-x"></i></span>
       <% end %>
           </a>
 

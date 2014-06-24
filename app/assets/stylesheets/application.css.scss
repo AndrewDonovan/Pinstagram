@@ -15,6 +15,16 @@
  @import "foundation_and_overrides";
 /* Add imports of custom sass/scss files here */
 
+.fi-x {
+   font-size: 50px;
+   float: right;
+}
+
+.fi-arrow-down {
+   font-size: 50px;
+   float: left;
+}
+
 .navbar {
 	position: fixed;
 	ul {
@@ -46,7 +56,6 @@
 	border: 10px solid white;
 
 }
-
 
 .board {
 	height: 250px;
