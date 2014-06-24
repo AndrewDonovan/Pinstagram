@@ -65,15 +65,28 @@ App.factory('Picture', ['$resource', function($resource) {
 	</div> -->
 
 
-  	<div class ="fullboard">
-  		<div ng-repeat="item in list4" class="inside">
+<!--   	<div class ="fullboard">
+  		<div ng-repeat="item in list4" class="inside" ng-style="{'background-image':'url({{ item.url }})'}">
   		<a href="{{item.url}}" download>
 	    	<img class="board"
 	    	ng-src="{{ item.url }}"
-	    	ng-model="list4"/>
-	    </a>
+	    	ng-model="list4"/>x
+	    </a> 
+  
+      <%#= link_to 'Delete', picture_path, method: :delete %>
 		</div>
-	</div>
+	</div> -->
+
+<div class="fullboard">
+  <% @pictures.each do |p| %>
+    <div class="inside", style="background-image: url('<%= p.url %>')">
+      <%= link_to p, method: :delete do %>
+        <span>x</span>
+      <% end %>
+    </div>
+  <% end %>
+</div>
+
 
   </div>
 </body>

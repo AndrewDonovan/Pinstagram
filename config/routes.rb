@@ -5,7 +5,7 @@ Instaapi::Application.routes.draw do
   root "home#index"
   resources :users
   resources :home
-  resources :pictures
+  resources :pictures, only: [:new, :index, :create, :show, :destroy]
   resource :sessions, only: [:new, :create, :destroy]
   
   match "/signin", to: "sessions#new", via: "get"

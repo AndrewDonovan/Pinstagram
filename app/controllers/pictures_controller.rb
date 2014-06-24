@@ -30,8 +30,21 @@ class PicturesController < ApplicationController
   end
 
   def show
-  	@pictures = current_user.pictures.all
+  	# @pictures = current_user.pictures.all
+  	# respond_with @pictures
+    @picture = Picture.find(params[:id])
   	respond_with @pictures
+  end
+
+  def destroy
+  	Picture.destroy params[:id]
+  	redirect_to pictures_path
+    # @picture = Picture.find(params[:id])
+    # @picture.destroy
+    #   respond_to do |format|
+    #     format.html { redirect_to :root }
+    #     format.json { render json: {head: :ok} }
+    #   end
   end
 
 

@@ -100,7 +100,7 @@ App.factory('Picture', ['$resource', function($resource) {
     <!-- this is the button as well as sign in and sign out paths - do not want this in final verison and need to style NEED TO FIX THE FACT THAT BOTH SEARCH BOXS HAVE TO BE FULL IN ORDER TO SUBMIT-->
       <%= form_tag root_path, :method => 'get' do %>  
         <% if @user %> 
-          <h3 class ="name"><%= link_to @user.name, home_path(@current_user) %></h3>
+          <h3 class ="name"><%= link_to @user.name, pictures_path %></h3>
           <!-- like to the show board for specifc user -->
         <% end %>
         <h3 class ="login">
