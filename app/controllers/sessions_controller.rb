@@ -12,7 +12,7 @@
 #   end
 # end
 class SessionsController < ApplicationController
-
+	after_action :allow_insta_iframe
 
 	def new
 	end
@@ -28,7 +28,14 @@ class SessionsController < ApplicationController
 	def destroy
 		session[:user_id] = nil
 		redirect_to root_path, :notice => "Signed out!"
-		# redirect_to 'http://instagram.com/accounts/logout'	
+		#'http://instagram.com/accounts/logout'	
 	end
+	
+private
+
+  def allow_insta_iframe
+    response.headers['X-Frame-Options'] = 'ALLOW-FROM http://instagram.com'
+  end
+
 end
 

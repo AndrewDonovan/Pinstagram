@@ -1,3 +1,53 @@
-this will be the board that shows all users saved pictures
+<!-- CONTROLLER SCRIPT BELOW -->
+<script>
+  var App = angular.module('drag-and-drop', ['ngDragDrop','ngResource']).config(
+    ['$httpProvider', function($httpProvider) {
+    var authToken = angular.element("meta[name=\"csrf-token\"]").attr("content");
+    var defaults = $httpProvider.defaults.headers;
 
-<%= link_to "Home", :root%>
+    defaults.common["X-CSRF-TOKEN"] = authToken;
+    defaults.patch = defaults.patch || {};
+    defaults.patch['Content-Type'] = 'application/json';
+    defaults.common['Accept'] = 'application/json';
+}]);
+App.factory('Picture', ['$resource', function($resource) {
+  return $resource('/pictures/:id',
+     {url: '@url',
+      id: '@id' },
+     {update: { method: 'PATCH'}});
+}]);
+  // this controller starts all lists as blank arrays which the feed is pushed into, and then list 4 is dragged into
+    App.controller('oneCtrl',['$scope', '$timeout', 'Picture', function($scope, $timeout, Picture) {
+    $scope.pictures= [];
+    $scope.newPicture = new Picture();
+    Picture.query(function(pictures) {
+      $scope.list4 = pictures;
+   });
+      $scope.list4 = [];
+      $scope.targetPhoto = null;
+      // the selectPhoto function gets the photo that is selected url from the item.target.src which is the url inside the dragged images info
+
+      // upon drop, this pushes the url into the list4 which then displays it, and then after it returns the target back to nil so i can do it again
+    $scope.drop = function() {
+      $scope.list4.unshift($scope.targetPhoto);
+      $scope.list4.pop();
+      $scope.targetPhoto.$save(function(picture) {
+        $scope.pictures.unshift(picture);
+        $scope.targetPhoto = new Picture();
+      });
+      $scope.targetPhoto = null;
+    }
+  }]);
+</script>
+<!-- INDEX.HTML.ERB BELOW -->
+<body ng-app="drag-and-drop">
+  <div ng-controller="oneCtrl">
+  	<div class ="board">
+	    <img
+	    ng-repeat="item in list4"
+	    ng-src="{{ item.url }}"
+	    ng-model="list4"/>
+	</div>
+  </div>
+  <%= link_to "Home", :root%>
+</body>

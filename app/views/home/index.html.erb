@@ -74,6 +74,20 @@ App.factory('Picture', ['$resource', function($resource) {
       $scope.targetPhoto = null;
     }
   }]);
+
+// this opens a new tab to sign out of the instgram link
+  $(document).ready(function(){
+    $("#signout").on('click', function(){
+      window.open('http://instagram.com/accounts/logout');
+      
+      $('<iframe />', {
+        src: 'http://instagram.com/accounts/logout'
+      }).appendTo('body');
+
+    });
+
+});
+
 </script>
 
 <!-- INDEX.HTML.ERB BELOW -->
@@ -90,7 +104,8 @@ App.factory('Picture', ['$resource', function($resource) {
           <!-- like to the show board for specifc user -->
         <% end %>
         <h3 class ="login">
-          <%= link_to "Sign Out", signout_path %>
+<!--           <div id='test'> sign out test </div> -->          
+               <%= link_to "Sign Out", signout_path, id: "signout" %>
         </h3>
         <header>
           <%= submit_tag "SEARCH INSTAGRAM USERS AND HASHTAGS", class:"button expand" %>
