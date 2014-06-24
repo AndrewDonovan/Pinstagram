@@ -1,6 +1,6 @@
 <!-- CONTROLLER SCRIPT BELOW -->
 <script>
-  var App = angular.module('drag-and-drop', ['ngDragDrop','ngResource']).config(
+  var App = angular.module('drag-and-drop', ['ngDragDrop','ngResource','mm.foundation']).config(
     ['$httpProvider', function($httpProvider) {
     var authToken = angular.element("meta[name=\"csrf-token\"]").attr("content");
     var defaults = $httpProvider.defaults.headers;
@@ -79,14 +79,16 @@ App.factory('Picture', ['$resource', function($resource) {
 
 <div class="fullboard">
   <% @pictures.each do |p| %>
-    <div class="inside", style="background-image: url('<%= p.url %>')">
+       <div class="inside", style="background-image: url('<%= p.url %>')">
+       <a href="<%= p.url %>" download> save
       <%= link_to p, method: :delete do %>
-        <span>x</span>
+        <span>X</span>
       <% end %>
+          </a>
+
     </div>
   <% end %>
 </div>
-
 
   </div>
 </body>
