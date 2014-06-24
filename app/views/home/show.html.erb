@@ -57,11 +57,23 @@ App.factory('Picture', ['$resource', function($resource) {
  	<ul><%= link_to "Instagram", "http://www.instagram.com"%></ul> 
 	<ul><%= link_to "Sign Out", signout_path, id: "signout" %></ul>
   </header>
+<!--   	<div class ="fullboard">
+	    	<img class="board"
+	    	ng-repeat="item in list4"
+	    	ng-src="{{ item.url }}"
+	    	ng-model="list4"/>
+	</div> -->
+
+
   	<div class ="fullboard">
-	    <img class="board"
-	    ng-repeat="item in list4"
-	    ng-src="{{ item.url }}"
-	    ng-model="list4"/>
+  		<div ng-repeat="item in list4" class="inside">
+  		<a href="{{item.url}}" download>
+	    	<img class="board"
+	    	ng-src="{{ item.url }}"
+	    	ng-model="list4"/>
+	    </a>
+		</div>
 	</div>
+
   </div>
 </body>
