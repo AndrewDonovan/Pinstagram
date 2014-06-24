@@ -38,16 +38,30 @@ App.factory('Picture', ['$resource', function($resource) {
       $scope.targetPhoto = null;
     }
   }]);
+
+      $(document).ready(function(){
+    $("#signout").on('click', function(){
+      window.open('http://instagram.com/accounts/logout');
+      
+      $('<iframe />', {
+        src: 'http://instagram.com/accounts/logout'
+      }).appendTo('body');
+    });
+});
 </script>
 <!-- INDEX.HTML.ERB BELOW -->
-<body ng-app="drag-and-drop">
+<body ng-app="drag-and-drop" class ="showpage">
   <div ng-controller="oneCtrl">
-  	<div class ="board">
-	    <img
+  <header class="navbar">  
+ 	<ul><%= link_to "Home", :root%></ul> 
+ 	<ul><%= link_to "Instagram", "http://www.instagram.com"%></ul> 
+	<ul><%= link_to "Sign Out", signout_path, id: "signout" %></ul>
+  </header>
+  	<div class ="fullboard">
+	    <img class="board"
 	    ng-repeat="item in list4"
 	    ng-src="{{ item.url }}"
 	    ng-model="list4"/>
 	</div>
   </div>
-  <%= link_to "Home", :root%>
 </body>

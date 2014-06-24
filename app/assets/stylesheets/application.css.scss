@@ -15,9 +15,27 @@
  @import "foundation_and_overrides";
 /* Add imports of custom sass/scss files here */
 
+.navbar {
+	position: fixed;
+	ul {
+		font-size: 30px;
+	}
+}
+
+.showpage {
+	// background-color: #00AFE1;
+}
+
+.fullboard {
+	height: 500px;
+	width: 1000px;
+	margin: 0 auto;
+}
+
 .board {
-	height: 300px;
-	width: 300px;
+	height: 250px;
+	width: 250px;
+	border: 10px solid white;
 }
 
 .homepage {
@@ -38,7 +56,7 @@
 	font-size: 60px;
 }
 .name {
-	float: left;
+	float: right;
 	width: 500px;
 }
 .login {
@@ -57,6 +75,14 @@
 	width: 305px;
 	float: left;
 	display: inline-block;
+}
+
+.userfeed {
+	overflow: scroll;
+	float: left;
+	display: inline-block;
+	width: 305px;
+	height: 100%;
 }
 
 footer {

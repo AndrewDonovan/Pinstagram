@@ -108,7 +108,7 @@ App.factory('Picture', ['$resource', function($resource) {
                <%= link_to "Sign Out", signout_path, id: "signout" %>
         </h3>
         <header>
-          <%= submit_tag "SEARCH INSTAGRAM USERS AND HASHTAGS", class:"button expand" %>
+          <%= submit_tag "SEARCH INSTAGRAM USERS AND HASHTAGS", class:"button" %>
         </header>
     <!-- this feed is auto loaded when the user logs in and shows their own news feed / time line -->
     <div class="large-3 columns">
@@ -128,7 +128,7 @@ App.factory('Picture', ['$resource', function($resource) {
     </div>
     <!-- this shows the search for users profiles. need to fix the fact that it will only show public profiles -->
     <div class="large-3 columns">
-        <label>Search @username <%= text_field_tag :keyword, params[:keyword] %> </label>
+        <label class="prefix">search @username<%= text_field_tag :keyword, params[:keyword] %> </label>
           <div class="gram">
               <img
               ng-repeat="item in list2"
@@ -141,7 +141,7 @@ App.factory('Picture', ['$resource', function($resource) {
     </div>
     <!-- below shows the search for hashtags -->
     <div class="large-3 columns">
-      <label>Search #hashtag <%= text_field_tag :hashword, params[:hashword] %> </label>
+      <label class="prefix">Search #hashtag <%= text_field_tag :hashword, params[:hashword] %> </label>
         <div class ="gram">
               <img
               ng-repeat="item in list3"
