@@ -1,5 +1,7 @@
 class HomeController < ApplicationController
-  before_action :get_user_id, :authenticate_user
+  before_action :get_user_id
+  before_action :authenticate_user
+  
   def index
   		if params[:keyword]
         # search user names to show their recent media
