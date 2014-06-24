@@ -57,6 +57,7 @@ App.factory('Picture', ['$resource', function($resource) {
  	<ul><%= link_to "Instagram", "http://www.instagram.com"%></ul> 
 	<ul><%= link_to "Sign Out", signout_path, id: "signout" %></ul>
   </header>
+
 <!--   	<div class ="fullboard">
 	    	<img class="board"
 	    	ng-repeat="item in list4"
@@ -80,7 +81,7 @@ App.factory('Picture', ['$resource', function($resource) {
 <div class="fullboard">
   <% @pictures.each do |p| %>
        <div class="inside", style="background-image: url('<%= p.url %>')">
-       <a class="del-button del-button-hide" href="<%= p.url %>" download> <i class="fi-arrow-down"></i>
+       <a class="del-button del-button-hide" href="<%= p.url %>" download> <i class="fi-download"></i>
       <%= link_to p, method: :delete do %>
         <span class="del-button del-button-hide"><i class="fi-x"></i></span>
       <% end %>

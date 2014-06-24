@@ -2,8 +2,6 @@ class UsersController < ApplicationController
 	before_action :authenticate_user, :except => [:new, :create, :update]
 	respond_to :json, :html
 
-	
-	
 	def index
 		@user = "andrew"
 		respond_with @user
