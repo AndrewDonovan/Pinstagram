@@ -2,7 +2,7 @@ Instaapi::Application.routes.draw do
   # get "sessions/new"
   # get "sessions/create"
   # get "sessions/failure"
-  root "home#index"
+  root "welcome#index"
   resources :users
   resources :home
   resources :pictures, only: [:new, :index, :create, :show, :destroy]

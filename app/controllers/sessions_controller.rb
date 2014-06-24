@@ -22,7 +22,7 @@ class SessionsController < ApplicationController
 		puts auth
 		user = User.find_by_provider_and_uid(auth.provider, auth.uid) || User.create_with_omniauth(auth)
 		session[:user_id] = user.id
-		redirect_to root_path, :notice => "Signed in!"
+		redirect_to home_index_path, :notice => "Signed in!"
 	end
 
 	def destroy
