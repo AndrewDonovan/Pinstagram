@@ -15,6 +15,16 @@
  @import "foundation_and_overrides";
 /* Add imports of custom sass/scss files here */
 
+.col4 {
+	color: grey;
+	font-size: 20px;
+	padding-bottom: 10px;
+
+}
+.dragdrop {
+	border-left: 5px dashed lightgrey;
+	text-align: center;
+}
 
 footer {
 	text-align: center;
@@ -82,21 +92,21 @@ header {
 }
 
 .homepage {
-	background-image: url('board.jpg');
+	background-image: url('comp.jpg');
 	background-size: cover;
 }
 
 .title {
-	padding-top: 115px;
+	// padding-top: 115px;
 	font-family: 'Lobster', cursive;
 	font-size: 125px;
-	text-align: center;
+	text-align: left;
 	color: white;
 }
 
 .signin {
 	font-family: 'Lobster', cursive;
-	text-align: center;
+	text-align: left;
 	font-size: 60px;
 }
 

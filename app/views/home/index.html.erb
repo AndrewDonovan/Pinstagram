@@ -152,8 +152,9 @@ App.factory('Picture', ['$resource', function($resource) {
         </div>
     </div>
     <!-- below is where you will add the images to list4, which is the new coloumn of the saved photos -->
-    <div class="large-3 columns">
+    <div class="large-3 columns dragdrop">
               <div class="ui-widget-content gram" data-drop="true" ng-model='list4' jqyoui-droppable="{multiple:true, onDrop:'drop()'}" >
+                <div class="col4">Drag and Drop Photos Here:</div>
                     <img
                     ng-repeat="item in list4"
                     ng-src="{{ item.url }}"
