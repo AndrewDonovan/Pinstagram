@@ -13,23 +13,16 @@ class UsersController < ApplicationController
 		respond_with @pictures
 	end
 
-
 	def new
 		@user = User.new
 	end
 
-
-
 	def create
 		@user = User.new(user_params)
 		if @user.save
-			# session[:remember_token] = @user.id
-			# @current_user = @user
-			# session[:remember_token] = @user.id.to_s
 			flash.now[:success] = "You have succesfully signed up!"
 			redirect_to users_path
 		else
-	
 		end
 	end
 

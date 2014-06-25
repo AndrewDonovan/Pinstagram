@@ -30,7 +30,7 @@ footer {
 }
 
 header {
-	border-bottom: 5px solid;
+	border-bottom: 3px solid;
 	height: 50px;
 }
 .fi-x {
@@ -107,6 +107,8 @@ header {
 .name {
 	float: right;
 	margin-right: 10px;
+	padding-right: 10px;
+	border-right: 3px solid black;
 	// width: 500px;
 }
 .login {

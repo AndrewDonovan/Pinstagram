@@ -28,11 +28,10 @@ class SessionsController < ApplicationController
 	def destroy
 		session[:user_id] = nil
 		redirect_to root_path, :notice => "Signed out!"
-		#'http://instagram.com/accounts/logout'	
 	end
 	
 private
-
+ #below was an attempt at opening the instagram log out page in a pop out or iframe window but have yet to get this working before i delpoy 
   def allow_insta_iframe
     response.headers['X-Frame-Options'] = 'ALLOW-FROM http://instagram.com'
   end
