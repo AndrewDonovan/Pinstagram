@@ -1,5 +1,4 @@
 class Home < ActiveRecord::Base
-	
 	def self.idFind(query)
 		user = Instagram.user_search(query)[0].id
 		Instagram.user_recent_media(user, {:count => 15})

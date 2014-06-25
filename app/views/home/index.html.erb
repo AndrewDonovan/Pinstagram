@@ -94,21 +94,18 @@ App.factory('Picture', ['$resource', function($resource) {
 <body ng-app="drag-and-drop">
   <div ng-controller="oneCtrl">
     <!-- this is the button as well as sign in and sign out paths - do not want this in final verison and need to style NEED TO FIX THE FACT THAT BOTH SEARCH BOXS HAVE TO BE FULL IN ORDER TO SUBMIT-->
-      <%= form_tag home_index_path, :method => 'get' do %>  
-        <% if @user %> 
-<header>
-      <div class="pinstagram">Pinstagram</div>
-          <%= submit_tag ".", class: "submit" %>
-
-
+    <%= form_tag home_index_path, :method => 'get' do %>  
+      
+      <header>
+        <%= submit_tag "Pinstagram", class: "submit pinstagram" %>
         <h3 class ="login">
-               <%= link_to "Sign Out", signout_path, id: "signout" %>
+          <%= link_to "Sign Out", signout_path, id: "signout" %>
         </h3>
-          <h3 class ="name"><%= link_to "View Board", pictures_path %></h3>
-          <!-- like to the show board for specifc user -->
-        <% end %>
-</header>   
-    <!-- this feed is auto loaded when the user logs in and shows their own news feed / time line -->
+        <h3 class ="name">
+          <%= link_to "View Board", pictures_path %>
+        </h3>
+      </header>   
+      <!-- this feed is auto loaded when the user logs in and shows their own news feed / time line -->
           <div class="large-3 columns">
         <div class="gram">
           <div>
@@ -127,7 +124,9 @@ App.factory('Picture', ['$resource', function($resource) {
     <!-- this shows the search for users profiles. need to fix the fact that it will only show public profiles -->
     <div class="large-3 columns">
           <div class="gram">
-              <label class="prefix">enter @username here<%= text_field_tag :keyword, params[:keyword] %> </label>
+              <label class="prefix">
+                enter @username here<%= text_field_tag :keyword, params[:keyword], required: true %>
+              </label>
               <img
               ng-repeat="item in list2"
               ng-src="{{ item.url }}"
@@ -140,7 +139,9 @@ App.factory('Picture', ['$resource', function($resource) {
     <!-- below shows the search for hashtags -->
     <div class="large-3 columns">
         <div class ="gram">
-              <label class="prefix">enter #hashtag here<%= text_field_tag :hashword, params[:hashword] %> </label>
+              <label class="prefix">
+                enter #hashtag here<%= text_field_tag :hashword, params[:hashword], required: true %>
+              </label>
               <img
               ng-repeat="item in list3"
               ng-src="{{ item.url }}"

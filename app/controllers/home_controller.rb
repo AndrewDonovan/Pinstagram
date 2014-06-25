@@ -7,11 +7,19 @@ class HomeController < ApplicationController
       # search user names to show their recent media
 			@user_name2 = Home.idFind(params[:keyword])
 		end
+
 	  if params[:hashword]
       # seach hash tags
-	    @tags = Instagram.tag_recent_media((params[:hashword]), {:count => 15, :client_id => ENV['INSTAAPI_CLIENT_ID']})
- 	  end
-      @feed = Instagram.user_media_feed(:access_token => current_user.access_token, :count => 15, :client_id => ENV['INSTAAPI_CLIENT_ID'])
+	   @tags = Instagram.tag_recent_media((params[:hashword]), {
+        :count => 15, 
+        :client_id => ENV['INSTAAPI_CLIENT_ID']})
+    end
+
+    @feed = Instagram.user_media_feed(
+      :access_token => current_user.access_token, 
+      :count => 15, 
+      :client_id => ENV['INSTAAPI_CLIENT_ID'])
+
     # below is the code that inputs the above feeds or search inputs into the javascript controllers
     @feedurls = []
     if @current_user.present?

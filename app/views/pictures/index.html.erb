@@ -38,7 +38,7 @@ App.factory('Picture', ['$resource', function($resource) {
       $scope.targetPhoto = null;
     }
   }]);
-    
+
       $(document).ready(function(){
     $("#signout").on('click', function(){
       window.open('http://instagram.com/accounts/logout');
@@ -80,7 +80,7 @@ App.factory('Picture', ['$resource', function($resource) {
 	</div> -->
 
 <div class="fullboard">
-  <% @pictures.each do |p| %>
+  <% @pictures.reverse.each do |p| %>
        <div class="inside", style="background-image: url('<%= p.url %>')">
        <a class="del-button del-button-hide" href="<%= p.url %>" download> <i class="fi-download"></i>
       <%= link_to p, method: :delete do %>
