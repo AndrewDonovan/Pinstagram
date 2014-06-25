@@ -13,7 +13,7 @@ class HomeController < ApplicationController
    	  end
       # if current_user
         # this is the actual logged in users news feed of who they are following
-        @feed = Instagram.user_media_feed(:access_token => current_user.access_token, :count => 15, :client_id => ENV['INSTAAPI_CLIENT_ID'])
+        # @feed = Instagram.user_media_feed(:access_token => current_user.access_token, :count => 15, :client_id => ENV['INSTAAPI_CLIENT_ID'])
       # end
 # below is the code that inputs the above feeds or search inputs into the javascript controllers
       @feedurls = []

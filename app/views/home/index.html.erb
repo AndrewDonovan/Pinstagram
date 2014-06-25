@@ -36,11 +36,12 @@ App.factory('Picture', ['$resource', function($resource) {
       $scope.targetPhoto = null;
 
       // pushing in the urls to the list array as objects from the home controller.
-      <% @feedurls.each do |url| %>
-        $scope.list1.push({
-          'url': '<%= url %>'
-        })
-      <% end %>
+      // <% @feedurls.each do |url| %>
+      //   $scope.list1.push({
+      //     'url': '<%= url %>'
+      //   })
+      // <% end %>
+      <%= current_user.access_token %> access token
 
       <% @usearch.each do |url| %>
         $scope.list2.push({
