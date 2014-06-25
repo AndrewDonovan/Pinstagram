@@ -16,12 +16,12 @@ class HomeController < ApplicationController
         @feed = Instagram.user_media_feed(:access_token => current_user.access_token, :count => 15, :client_id => ENV['INSTAAPI_CLIENT_ID'])
       # end
 # below is the code that inputs the above feeds or search inputs into the javascript controllers
-      # @feedurls = []
-      # if @current_user.present?
-      #   @feed.each do |feed|
-      #     @feedurls.push(feed.images.standard_resolution.url)
-      #       end
-      # end
+      @feedurls = []
+      if @current_user.present?
+        @feed.each do |feed|
+          @feedurls.push(feed.images.standard_resolution.url)
+            end
+      end
 
       @usearch = []
       if @user_name2.present?
