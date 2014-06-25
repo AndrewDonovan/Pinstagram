@@ -153,8 +153,6 @@ App.factory('Picture', ['$resource', function($resource) {
     </div>
     <!-- below is where you will add the images to list4, which is the new coloumn of the saved photos -->
     <div class="large-3 columns">
-        <div id="cart">
-            <h4 class="ui-widget-header large-3 columns"></h4>
               <div class="ui-widget-content gram" data-drop="true" ng-model='list4' jqyoui-droppable="{multiple:true, onDrop:'drop()'}" >
                     <img
                     ng-repeat="item in list4"
@@ -163,9 +161,7 @@ App.factory('Picture', ['$resource', function($resource) {
                     data-jqyoui-options="{revert: 'invalid', helper: 'clone'}"
                     jqyoui-draggable="{index: {{$index}}, animate:true}" 
                     ng-model="list4"/>
-                    <!-- {{list4}} shows the url info that is being passed over the the function-->
               </div>
-        </div>
     </div>
   </div>
 <!-- this end is the for form for do loop at the start of the document.... might need to change this and make a form for each one that way you can search only one input at a time -->
