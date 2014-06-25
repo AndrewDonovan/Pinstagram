@@ -11,10 +11,10 @@ class HomeController < ApplicationController
         # seach has tags
 		    @tags = Instagram.tag_recent_media((params[:hashword]), {:count => 15, :client_id => ENV['INSTAAPI_CLIENT_ID']})
    	  end
-      if current_user
+      # if current_user
         # this is the actual logged in users news feed of who they are following
         @feed = Instagram.user_media_feed(:access_token => current_user.access_token, :count => 15, :client_id => ENV['INSTAAPI_CLIENT_ID'])
-      end
+      # end
 # below is the code that inputs the above feeds or search inputs into the javascript controllers
       @feedurls = []
       if @current_user.present?
