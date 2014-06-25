@@ -19,7 +19,6 @@
 	color: grey;
 	font-size: 20px;
 	padding-bottom: 10px;
-
 }
 .dragdrop {
 	border-left: 5px dashed lightgrey;
@@ -58,6 +57,7 @@ header {
 	position: fixed;
 	ul {
 		font-size: 30px;
+		font-family: 'Fjalla One', sans-serif;
 	}
 }
 
@@ -121,10 +121,12 @@ header {
 	margin-right: 10px;
 	padding-right: 10px;
 	border-right: 3px solid black;
+	font-family: 'Fjalla One', sans-serif;
 }
 .login {
 	float: right;
 	padding-right: 50px;
+	font-family: 'Fjalla One', sans-serif;
 }
 
 .picture {
