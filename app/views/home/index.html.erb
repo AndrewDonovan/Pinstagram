@@ -93,10 +93,6 @@ App.factory('Picture', ['$resource', function($resource) {
 <!-- INDEX.HTML.ERB BELOW -->
 <body ng-app="drag-and-drop">
   <div ng-controller="oneCtrl">
-<!-- if you are no logged in then render the form / intro page -->
-<% if !@user %>
-<%= render 'form' %>
-<% else %>
     <!-- this is the button as well as sign in and sign out paths - do not want this in final verison and need to style NEED TO FIX THE FACT THAT BOTH SEARCH BOXS HAVE TO BE FULL IN ORDER TO SUBMIT-->
       <%= form_tag root_path, :method => 'get' do %>  
         <% if @user %> 

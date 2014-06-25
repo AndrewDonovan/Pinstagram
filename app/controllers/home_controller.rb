@@ -1,7 +1,7 @@
 class HomeController < ApplicationController
   before_action :get_user_id
   before_action :authenticate_user
-  
+
   def index
   		if params[:keyword]
         # search user names to show their recent media
@@ -12,6 +12,7 @@ class HomeController < ApplicationController
 		    @tags = Instagram.tag_recent_media((params[:hashword]), {:count => 15, :client_id => ENV['INSTAAPI_CLIENT_ID']})
    	  end
       if current_user
+        binding.pry
         # this is the actual logged in users news feed of who they are following
         @feed = Instagram.user_media_feed(:access_token => current_user.access_token, :count => 15, :client_id => ENV['INSTAAPI_CLIENT_ID'])
       end
