@@ -11,7 +11,7 @@ Instaapi::Application.routes.draw do
   
   match "/signin", to: "sessions#new", via: "get"
   get "/signout", to: "sessions#destroy", as: :signout
-  get "/auth/:instagram/callback", to: "sessions#create"
+  get "/auth/:instagram/", to: "sessions#create"
 
 
   
