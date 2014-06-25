@@ -36,12 +36,11 @@ App.factory('Picture', ['$resource', function($resource) {
       $scope.targetPhoto = null;
 
       // pushing in the urls to the list array as objects from the home controller.
-      // <% @feedurls.each do |url| %>
+      // <#% @feedurls.each do |url| %>
       //   $scope.list1.push({
-      //     'url': '<%= url %>'
+      //     'url': '<#%= url %>'
       //   })
-      // <% end %>
-      <%= current_user.access_token %> access token
+      // <#% end %>
 
       <% @usearch.each do |url| %>
         $scope.list2.push({
@@ -94,6 +93,8 @@ App.factory('Picture', ['$resource', function($resource) {
 <!-- INDEX.HTML.ERB BELOW -->
 <body ng-app="drag-and-drop">
   <div ng-controller="oneCtrl">
+        <%= current_user.access_token %> access token
+
     <!-- this is the button as well as sign in and sign out paths - do not want this in final verison and need to style NEED TO FIX THE FACT THAT BOTH SEARCH BOXS HAVE TO BE FULL IN ORDER TO SUBMIT-->
       <%= form_tag root_path, :method => 'get' do %>  
         <% if @user %> 
@@ -169,5 +170,5 @@ App.factory('Picture', ['$resource', function($resource) {
   </div>
 <!-- this end is the for form for do loop at the start of the document.... might need to change this and make a form for each one that way you can search only one input at a time -->
 <% end %>
-<% end %>
-</body>
+<!-- <#% end %>
+ --></body>
