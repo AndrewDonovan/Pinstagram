@@ -1,28 +1,7 @@
 == README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Pintrest was created using Ruby on Rails, Javascript, and Angular.
 
-Things you may want to cover:
+The main focus of this project was to use the Angular Drag & Drop feature to let users save photos to their "board".
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-
-
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+Using user authentication with Instagram users can view their own new feed, as well as search for users and hashtags.  
