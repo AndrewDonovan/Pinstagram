@@ -98,7 +98,8 @@ App.factory('Picture', ['$resource', function($resource) {
         <% if @user %> 
 <header>
       <div class="pinstagram">Pinstagram</div>
-                    <%= submit_tag "search", class: "submit" %>
+          <%= submit_tag "search", class: "submit" %>
+
 
         <h3 class ="login">
                <%= link_to "Sign Out", signout_path, id: "signout" %>
@@ -110,7 +111,6 @@ App.factory('Picture', ['$resource', function($resource) {
 </header>   
     <!-- this feed is auto loaded when the user logs in and shows their own news feed / time line -->
           <div class="large-3 columns">
-      <div class="lable">News Feed</div>
         <div class="gram">
           <div>
               <img
@@ -153,7 +153,6 @@ App.factory('Picture', ['$resource', function($resource) {
     </div>
     <!-- below is where you will add the images to list4, which is the new coloumn of the saved photos -->
     <div class="large-3 columns">
-      <div class="lable">Drag and Drop Photos Here to Save to Board</div>
         <div id="cart">
             <h4 class="ui-widget-header large-3 columns"></h4>
               <div class="ui-widget-content gram" data-drop="true" ng-model='list4' jqyoui-droppable="{multiple:true, onDrop:'drop()'}" >
@@ -172,4 +171,3 @@ App.factory('Picture', ['$resource', function($resource) {
 <!-- this end is the for form for do loop at the start of the document.... might need to change this and make a form for each one that way you can search only one input at a time -->
 <% end %>
  </body>
- <footer>Pinstagram. Created by Andrew Donovan</footer>
