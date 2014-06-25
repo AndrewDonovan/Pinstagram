@@ -96,19 +96,19 @@ App.factory('Picture', ['$resource', function($resource) {
     <!-- this is the button as well as sign in and sign out paths - do not want this in final verison and need to style NEED TO FIX THE FACT THAT BOTH SEARCH BOXS HAVE TO BE FULL IN ORDER TO SUBMIT-->
       <%= form_tag home_index_path, :method => 'get' do %>  
         <% if @user %> 
-          <h3 class ="name"><%= link_to @user.name, pictures_path %></h3>
-          <!-- like to the show board for specifc user -->
-        <% end %>
+<header>
         <h3 class ="login">
-<!--           <div id='test'> sign out test </div> -->          
                <%= link_to "Sign Out", signout_path, id: "signout" %>
         </h3>
-        <header>
+          <h3 class ="name"><%= link_to "View Board", pictures_path %></h3>
+          <!-- like to the show board for specifc user -->
+        <% end %>
+
           <%= submit_tag "SEARCH INSTAGRAM USERS AND HASHTAGS", class:"button" %>
-        </header>
+</header>   
     <!-- this feed is auto loaded when the user logs in and shows their own news feed / time line -->
-    <div class="large-3 columns">
-      <h3>News Feed</h3>
+          <div class="large-3 columns">
+      <div class="lable">News Feed</div>
         <div class="gram">
           <div>
               <img
@@ -122,9 +122,10 @@ App.factory('Picture', ['$resource', function($resource) {
           </div>
         </div>
     </div>
+
     <!-- this shows the search for users profiles. need to fix the fact that it will only show public profiles -->
     <div class="large-3 columns">
-        <label class="prefix">search @username<%= text_field_tag :keyword, params[:keyword] %> </label>
+        <label class="prefix">enter @username here<%= text_field_tag :keyword, params[:keyword] %> </label>
           <div class="gram">
               <img
               ng-repeat="item in list2"
@@ -137,7 +138,7 @@ App.factory('Picture', ['$resource', function($resource) {
     </div>
     <!-- below shows the search for hashtags -->
     <div class="large-3 columns">
-      <label class="prefix">Search #hashtag <%= text_field_tag :hashword, params[:hashword] %> </label>
+      <label class="prefix">enter #hashtag here<%= text_field_tag :hashword, params[:hashword] %> </label>
         <div class ="gram">
               <img
               ng-repeat="item in list3"
@@ -150,7 +151,7 @@ App.factory('Picture', ['$resource', function($resource) {
     </div>
     <!-- below is where you will add the images to list4, which is the new coloumn of the saved photos -->
     <div class="large-3 columns">
-      <h3>Board</h3>
+      <div class="lable">Drag and Drop Photos Here to Save to Board</div>
         <div id="cart">
             <h4 class="ui-widget-header large-3 columns"></h4>
               <div class="ui-widget-content gram" data-drop="true" ng-model='list4' jqyoui-droppable="{multiple:true, onDrop:'drop()'}" >
@@ -168,5 +169,5 @@ App.factory('Picture', ['$resource', function($resource) {
   </div>
 <!-- this end is the for form for do loop at the start of the document.... might need to change this and make a form for each one that way you can search only one input at a time -->
 <% end %>
-<!-- <#% end %>
- --></body>
+ </body>
+ <footer>Pinstagram. Created by Andrew Donovan</footer>

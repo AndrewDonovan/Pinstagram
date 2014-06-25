@@ -15,6 +15,23 @@
  @import "foundation_and_overrides";
 /* Add imports of custom sass/scss files here */
 
+footer {
+	text-align: center;
+	position:absolute;
+    bottom:0;
+    width:100%;
+    font-size: 12px;
+    border-top: 2px solid grey;
+}
+
+.lable {
+	text-align: center;
+	font-size: 15px;
+}
+
+header {
+	border-bottom: 5px solid;
+}
 .fi-x {
    font-size: 50px;
    float: right;
@@ -80,12 +97,12 @@
 	font-size: 60px;
 }
 .name {
-	float: right;
+	float: left;
 	width: 500px;
 }
 .login {
 	float: right;
-	width: 300px;
+	// width: 300px;
 }
 
 .picture {
