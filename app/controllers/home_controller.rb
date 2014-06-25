@@ -12,7 +12,6 @@ class HomeController < ApplicationController
 		    @tags = Instagram.tag_recent_media((params[:hashword]), {:count => 15, :client_id => ENV['INSTAAPI_CLIENT_ID']})
    	  end
       if current_user
-        binding.remote_pry
         # this is the actual logged in users news feed of who they are following
         @feed = Instagram.user_media_feed(:access_token => current_user.access_token, :count => 15, :client_id => ENV['INSTAAPI_CLIENT_ID'])
       end

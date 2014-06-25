@@ -9,8 +9,6 @@ gem 'omniauth', '~> 1.0'
 gem 'omniauth-instagram'
 gem 'pry'
 gem 'angularjs-rails'
-gem 'pry-remote'
-
 
 
 
