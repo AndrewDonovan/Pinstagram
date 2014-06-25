@@ -97,6 +97,9 @@ App.factory('Picture', ['$resource', function($resource) {
       <%= form_tag home_index_path, :method => 'get' do %>  
         <% if @user %> 
 <header>
+      <div class="pinstagram">Pinstagram</div>
+                    <%= submit_tag "search", class: "submit" %>
+
         <h3 class ="login">
                <%= link_to "Sign Out", signout_path, id: "signout" %>
         </h3>
@@ -104,7 +107,6 @@ App.factory('Picture', ['$resource', function($resource) {
           <!-- like to the show board for specifc user -->
         <% end %>
 
-          <%= submit_tag "SEARCH INSTAGRAM USERS AND HASHTAGS", class:"button" %>
 </header>   
     <!-- this feed is auto loaded when the user logs in and shows their own news feed / time line -->
           <div class="large-3 columns">
@@ -125,8 +127,8 @@ App.factory('Picture', ['$resource', function($resource) {
 
     <!-- this shows the search for users profiles. need to fix the fact that it will only show public profiles -->
     <div class="large-3 columns">
-        <label class="prefix">enter @username here<%= text_field_tag :keyword, params[:keyword] %> </label>
           <div class="gram">
+              <label class="prefix">enter @username here<%= text_field_tag :keyword, params[:keyword] %> </label>
               <img
               ng-repeat="item in list2"
               ng-src="{{ item.url }}"
@@ -138,8 +140,8 @@ App.factory('Picture', ['$resource', function($resource) {
     </div>
     <!-- below shows the search for hashtags -->
     <div class="large-3 columns">
-      <label class="prefix">enter #hashtag here<%= text_field_tag :hashword, params[:hashword] %> </label>
         <div class ="gram">
+              <label class="prefix">enter #hashtag here<%= text_field_tag :hashword, params[:hashword] %> </label>
               <img
               ng-repeat="item in list3"
               ng-src="{{ item.url }}"
