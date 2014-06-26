@@ -52,44 +52,33 @@ App.factory('Picture', ['$resource', function($resource) {
 <!-- INDEX.HTML.ERB BELOW -->
 <body ng-app="drag-and-drop" class ="showpage">
   <div ng-controller="oneCtrl">
-
-  <header class="navbar">  
- 	<ul><%= link_to "Home", home_index_path %></ul> 
- 	<ul><%= link_to "Instagram", "http://www.instagram.com" %></ul> 
-	<ul><%= link_to "Sign Out", signout_path, id: "signout" %></ul>
-  </header>
-
-<!--   	<div class ="fullboard">
-	    	<img class="board"
-	    	ng-repeat="item in list4"
-	    	ng-src="{{ item.url }}"
-	    	ng-model="list4"/>
-	</div> -->
-
-
-<!--   	<div class ="fullboard">
-  		<div ng-repeat="item in list4" class="inside" ng-style="{'background-image':'url({{ item.url }})'}">
-  		<a href="{{item.url}}" download>
-	    	<img class="board"
-	    	ng-src="{{ item.url }}"
-	    	ng-model="list4"/>x
-	    </a> 
-  
-      <%#= link_to 'Delete', picture_path, method: :delete %>
-		</div>
-	</div> -->
-
-<div class="fullboard">
-  <% @pictures.reverse.each do |p| %>
-       <div class="inside", style="background-image: url('<%= p.url %>')">
-       <a class="del-button del-button-hide" href="<%= p.url %>" download> <i class="fi-download"></i>
-      <%= link_to p, method: :delete do %>
-        <span class="del-button del-button-hide"><i class="fi-x"></i></span>
+    <header class="navbar">  
+     	<ul>
+        <%= link_to "Home", home_index_path %>
+        <%=image_tag "house3.svg", class: "icon2"%>
+      </ul> 
+     	<ul>
+        <%= link_to "Instagram", "http://www.instagram.com" %>
+        <%=image_tag "icon.svg", class: "icon2"%>
+      </ul> 
+    	<ul>
+        <%= link_to "Sign Out", signout_path, id: "signout" %>
+        <%=image_tag "door13.svg", class: "icon2"%>
+      </ul>
+    </header>
+    <div class="fullboard">
+      <% @pictures.reverse.each do |p| %>
+        <div class="inside", style="background-image: url('<%= p.url %>')">
+         <a class="del-button del-button-hide" href="<%= p.url %>" download> 
+                  <%=image_tag "floppy13.svg", class: "icon3"%>
+                  <%= link_to p, method: :delete do %>
+            <span class="del-button del-button-hide">
+              <%=image_tag "trash8.svg", class: "icon4"%>
+            </span>
+            <% end %>
+            </a>
+        </div>
       <% end %>
-          </a>
     </div>
-  <% end %>
-</div>
-
   </div>
 </body>

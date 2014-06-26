@@ -15,6 +15,27 @@
  @import "foundation_and_overrides";
 /* Add imports of custom sass/scss files here */
 
+.icon {
+	height: 60px;
+	width: 60px;
+	padding-bottom: 5px;
+}
+.icon2 {
+	height: 40px;
+	width: 40px;
+	padding-bottom: 5px;
+}
+.icon3 {
+	height: 70px;
+	width: 70px;
+}
+.icon4 {
+	padding-top: 15px;
+	height: 60px;
+	width: 60px;
+	float: right;
+}
+
 .col4 {
 	padding-top: 10px;
 	color: grey;
@@ -63,14 +84,8 @@ header {
 	}
 }
 
-
 .del-button-hide {
   display: none;
-}
-
-
-.showpage {
-	// background-color: #00AFE1;
 }
 
 .fullboard {
@@ -85,7 +100,6 @@ header {
 	float: left;
 	background-size: cover;
 	border: 10px solid white;
-
 }
 
 .board {
@@ -104,12 +118,15 @@ header {
 	font-size: 125px;
 	text-align: left;
 	color: white;
+	padding-left: 20px;
 }
 
 .signin {
+	margin-top: -10px;
 	font-family: 'Lobster', cursive;
 	text-align: left;
 	font-size: 60px;
+	padding-left: 20px;
 }
 
 .pinstagram {
@@ -133,7 +150,7 @@ header {
 }
 .login {
 	float: right;
-	padding-right: 50px;
+	padding-right: 20px;
 	font-family: 'Fjalla One', sans-serif;
 }
 

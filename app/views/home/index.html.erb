@@ -17,8 +17,6 @@ App.factory('Picture', ['$resource', function($resource) {
       id: '@id' },
      {update: { method: 'PATCH'}});
 }]);
-
-
   // this controller starts all lists as blank arrays which the feed is pushed into, and then list 4 is dragged into
     App.controller('oneCtrl',['$scope', '$timeout', 'Picture', function($scope, $timeout, Picture) {
     $scope.pictures= [];
@@ -85,9 +83,7 @@ App.factory('Picture', ['$resource', function($resource) {
       }).appendTo('body');
 
     });
-
 });
-
 </script>
 
 <!-- INDEX.HTML.ERB BELOW -->
@@ -97,29 +93,31 @@ App.factory('Picture', ['$resource', function($resource) {
     <%= form_tag home_index_path, :method => 'get' do %>  
       
       <header>
-        <%= submit_tag "Pinstagram", class: "submit pinstagram" %>
+        <%= submit_tag "Pinstagram.", class: "submit pinstagram" %>
         <h3 class ="login">
           <%= link_to "Sign Out", signout_path, id: "signout" %>
+          <%=image_tag "door13.svg", class: "icon2"%>
         </h3>
         <h3 class ="name">
           <%= link_to "View Board", pictures_path %>
+          <%=image_tag "pin28.svg", class: "icon2"%>
         </h3>
       </header>   
       <!-- this feed is auto loaded when the user logs in and shows their own news feed / time line -->
-          <div class="large-3 columns">
+      <div class="large-3 columns">
         <div class="gram">
           <div>
-              <img
-              ng-repeat="item in list1"
-              ng-src="{{ item.url }}"
-              data-drag="true"
-              data-jqyoui-options="{revert: 'invalid', helper: 'clone'}"
-              jqyoui-draggable="{animate:true, onStart: 'selectPhoto'}" 
-              ng-model="list1"
-              />
+            <img
+            ng-repeat="item in list1"
+            ng-src="{{ item.url }}"
+            data-drag="true"
+            data-jqyoui-options="{revert: 'invalid', helper: 'clone'}"
+            jqyoui-draggable="{animate:true, onStart: 'selectPhoto'}" 
+            ng-model="list1"
+            />
           </div>
         </div>
-    </div>
+      </div>
 
     <!-- this shows the search for users profiles. need to fix the fact that it will only show public profiles -->
     <div class="large-3 columns">
@@ -151,18 +149,18 @@ App.factory('Picture', ['$resource', function($resource) {
               ng-model="list3"/>
         </div>
     </div>
-    <!-- below is where you will add the images to list4, which is the new coloumn of the saved photos -->
+    <!-- below is where you will add the images to list4, which is the new coloumn of the saved photos-->
     <div class="large-3 columns dragdrop">
-              <div class="ui-widget-content gram" data-drop="true" ng-model='list4' jqyoui-droppable="{multiple:true, onDrop:'drop()'}" >
-                <div class="col4">Drag and Drop Photos HERE:</div>
-                    <img
-                    ng-repeat="item in list4"
-                    ng-src="{{ item.url }}"
-                    data-drag="true"
-                    data-jqyoui-options="{revert: 'invalid', helper: 'clone'}"
-                    jqyoui-draggable="{index: {{$index}}, animate:true}" 
-                    ng-model="list4"/>
-              </div>
+      <div class="ui-widget-content gram" data-drop="true" ng-model='list4' jqyoui-droppable="{multiple:true, onDrop:'drop()'}" >
+        <div class="col4">Drag and Drop Photos HERE:</div>
+            <img
+            ng-repeat="item in list4"
+            ng-src="{{ item.url }}"
+            data-drag="true"
+            data-jqyoui-options="{revert: 'invalid', helper: 'clone'}"
+            jqyoui-draggable="{index: {{$index}}, animate:true}" 
+            ng-model="list4"/>
+      </div>
     </div>
   </div>
 <!-- this end is the for form for do loop at the start of the document.... might need to change this and make a form for each one that way you can search only one input at a time -->
