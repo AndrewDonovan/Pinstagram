@@ -15,14 +15,12 @@
  @import "foundation_and_overrides";
 /* Add imports of custom sass/scss files here */
 
-.submit {
-
-}
-
 .col4 {
+	padding-top: 10px;
 	color: grey;
 	font-size: 20px;
-	padding-bottom: 10px;
+	padding-bottom: 8px;
+	font-family: 'Open Sans', sans-serif;
 }
 .dragdrop {
 	border-left: 5px dashed lightgrey;
@@ -173,5 +171,5 @@ footer {
 	width: 300px;
 	z-index: 9999999;
 	opacity: 0.7;
-	border: 5px solid black;
+	border: 10px solid grey;
 }
